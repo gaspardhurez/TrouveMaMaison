@@ -56,7 +56,7 @@ with row[1]:
         locations=top_10_departments.index,
         color='global_score',
         mapbox_style="carto-positron",
-        center={"lat": 46.8, "lon": 2.9},
+        center={"lat": 46.8, "lon": 3.9},
         zoom=4.35,
         opacity=0.7,
         labels={'global_score': 'Global Score'},
