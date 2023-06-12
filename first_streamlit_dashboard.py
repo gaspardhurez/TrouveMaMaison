@@ -33,7 +33,7 @@ with row[0]:
 with row[1]:
     st.header('Map')
     
-    df = pd.read_csv('/data/department_scores.csv')
+    df = pd.read_csv('data/department_scores.csv')
     df['attr_score'] = df['attr_score'].str.replace(',', '.').astype(float)
     df['climate_score'] = df['climate_score'].str.replace(',', '.').astype(float)
     df['immo_score'] = df['immo_score'].str.replace(',', '.').astype(float)
@@ -43,10 +43,10 @@ with row[1]:
                                 + df['immo_score'] * housing_weight
                                 + df['dyn_score'] * dynamism_weight), 2)
 
-    df_geo = pd.read_csv('/data/geo_departments.csv')
+    df_geo = pd.read_csv('data/geo_departments.csv')
     df = pd.merge(df, df_geo, on='department_name')
 
-    geodata = gpd.read_file('/data/departements.geojson')
+    geodata = gpd.read_file('data/departements.geojson')
     df_geo = pd.merge(geodata, df, left_on='nom', right_on='department_name', how='inner')
 
     top_10_departments = df_geo.nlargest(10, 'global_score')
