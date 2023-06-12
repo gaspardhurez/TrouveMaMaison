@@ -53,7 +53,7 @@ with row[1]:
     fig = px.choropleth_mapbox(
         top_10_departments.head(5),
         geojson=top_10_departments.geometry,
-        locations=top_10_departments.index,
+        locations=top_10_departments.head(5).index,
         color='global_score',
         mapbox_style="carto-positron",
         center={"lat": 46.8, "lon": 2.4},
