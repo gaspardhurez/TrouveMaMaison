@@ -57,7 +57,7 @@ with row[1]:
         color='global_score',
         mapbox_style="carto-positron",
         center={"lat": 46.8, "lon": 2},
-        zoom=4.35,
+        zoom=4.5,
         opacity=0.7,
         labels={'global_score': 'Global Score'},
     )
