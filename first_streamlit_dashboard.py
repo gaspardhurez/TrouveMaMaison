@@ -51,9 +51,9 @@ with row[1]:
 
     top_10_departments = df_geo.nlargest(10, 'global_score')
     fig = px.choropleth_mapbox(
-        top_10_departments.head(5),
+        top_10_departments,
         geojson=top_10_departments.geometry,
-        locations=top_10_departments.head(5).index,
+        locations=top_10_departments.index,
         color='global_score',
         mapbox_style="carto-positron",
         center={"lat": 46.8, "lon": 2.4},
