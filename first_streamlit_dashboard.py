@@ -59,7 +59,7 @@ with row[1]:
         center={"lat": 46.8, "lon": 2.4},
         zoom=4.5,
         opacity=0.7,
-        featureidkey='properties.nom',
+        featureidkey='properties.department_name',
         labels={'global_score': 'Global Score'},
     )
 
