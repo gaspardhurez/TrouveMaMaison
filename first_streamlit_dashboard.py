@@ -10,6 +10,20 @@ st.set_page_config(layout="wide", initial_sidebar_state='expanded')
 credentials = service_account.Credentials.from_service_account_info(st.secrets["gcp_service_account"])
 client = bigquery.Client(credentials=credentials)
 
+st.markdown(
+    """
+    <style>
+    .horizontal-align-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 st.sidebar.header('Parameters')
 
 st.sidebar.subheader('Criterias weight')
@@ -81,11 +95,14 @@ with st.container():
 
     fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
 
+    st.markdown('<div class="horizontal-align-container">', unsafe_allow_html=True)
     col1.plotly_chart(fig, use_container_width=True)
     col2.table(df[['department_name', 'global_score']].nlargest(10, 'global_score'))
+    st.markdown('</div>', unsafe_allow_html=True)
 
 
-col1.markdown("---")
+
+st.markdown("---")
 
 # Line 2 : Metrics
 
