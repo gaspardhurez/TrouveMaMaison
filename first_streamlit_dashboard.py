@@ -38,11 +38,11 @@ else:
     tourism_weight = 1 / 4
 
 st.sidebar.subheader('Map parameters')
-st.sidebar.selectbox('')
+# st.sidebar.selectbox('')
 
 
 st.sidebar.subheader('Displayed metrics')
-st.sidebar.multiselect('')
+# st.sidebar.multiselect('')
 
 
 st.markdown(background_color, unsafe_allow_html=True)
