@@ -90,11 +90,14 @@ with row[0]:
     fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
 
     st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(px.bar(top_10_departments, y='global_score'), use_container_width=True)
+
 
 with row[1]:
     st.header('Top 10 departments')
     st.table(df[['department_name', 'global_score']].nlargest(10, 'global_score'))
+    st.plotly_chart(px.line(top_10_departments, y='global_score'), use_container_width=True)
 
 
-st.plotly_chart(px.bar(df, y='global_score'), use_container_width=True)
+
 
