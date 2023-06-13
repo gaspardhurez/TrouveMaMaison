@@ -58,7 +58,7 @@ line_data = st.sidebar.multiselect('Select data', ['global_score', 'tourism_scor
 
 col1, col2 = st.columns((4, 3), gap='large')
 
-col1.markdown('### Top 10 departments')
+# col1.markdown('### Top 10 departments')
 
 query = 'SELECT * FROM `scoring_tables.scores`'
 df = pd.read_gbq(query, project_id="team-prello-jogaan", credentials=credentials)
