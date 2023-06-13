@@ -83,8 +83,8 @@ with row[1]:
     st.plotly_chart(fig, use_container_width=True)
 
 with row[2]:
-    credentials = service_account.Credentials.from_service_account_info(st.secrets["gcp_service_account"]
     st.header('Top 10 departments')
+    credentials = service_account.Credentials.from_service_account_info(st.secrets["gcp_service_account"]
     st.table(df[['department_name', 'region_name', 'global_score']].nlargest(10, 'global_score'))
     query = 'SELECT * FROM `dbt_ghurez_departments.dep_climate`'
     df2 = pd.read_gbq(query, project_id="team-prello-jogaan")
