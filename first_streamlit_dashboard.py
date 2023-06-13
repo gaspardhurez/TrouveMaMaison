@@ -3,6 +3,9 @@ import pandas as pd
 import geopandas as gpd
 import plotly.express as px
 
+st.set_page_config(layout="wide")
+
+
 background_color = '''
     <style>
         body {
@@ -13,7 +16,6 @@ background_color = '''
 
 st.markdown(background_color, unsafe_allow_html=True)
 
-st.set_page_config(layout="wide")
 
 st.title('Where should I buy my secondary home?')
 st.markdown("---")
