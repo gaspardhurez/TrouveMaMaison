@@ -29,35 +29,36 @@ row = st.columns((2, 4, 3), gap='large')
 with row[0]:
     st.header('Preferences')
 
-    housing_score = st.slider('Housing KPIs', 0, 5, value=5)
-    climate_score = st.slider('Climate KPIs', 0, 5, value=5)
-    attractivity_score = st.slider('Attractivity KPIs', 0, 5, value=5)
-    dynamism_score = st.slider('Dynamism KPIs', 0, 5, value=5)
-    total_score = housing_score + climate_score + attractivity_score + dynamism_score
+    housing_score = st.slider('Profitability', 0, 5, value=5)
+    climate_score = st.slider('Climate', 0, 5, value=5)
+    tourism_score = st.slider('Tourism', 0, 5, value=5)
+    dev_score = st.slider('Development', 0, 5, value=5)
+    total_score = housing_score + climate_score + tourism_score + dev_score
 
     if total_score != 0:
         housing_weight = housing_score / total_score
         climate_weight = climate_score / total_score
-        dynamism_weight = dynamism_score / total_score
-        attractivity_weight = attractivity_score / total_score
+        dev_weight = dev_score / total_score
+        tourism_weight = tourism_score / total_score
     else:
         housing_weight = 1 / 4
         climate_weight = 1 / 4
-        dynamism_weight = 1 / 4
-        attractivity_weight = 1 / 4
+        dev_weight = 1 / 4
+        tourism_weight = 1 / 4
 
 with row[1]:
     st.header('Map')
-    
-    df = pd.read_csv('data/department_scores.csv')
-    df['attr_score'] = df['attr_score'].str.replace(',', '.').astype(float)
+
+    query = 'SELECT * FROM `scoring_tables.scores`'
+    df = pd.read_gbq(query, project_id="team-prello-jogaan", credentials=credentials)
+    df['tourism_score'] = df['tourism_score'].str.replace(',', '.').astype(float)
     df['climate_score'] = df['climate_score'].str.replace(',', '.').astype(float)
     df['immo_score'] = df['immo_score'].str.replace(',', '.').astype(float)
-    df['dyn_score'] = df['dyn_score'].str.replace(',', '.').astype(float)
-    df['global_score'] = round((df['attr_score'] * attractivity_weight
+    df['dev_score'] = df['dev_score'].str.replace(',', '.').astype(float)
+    df['global_score'] = round((df['tourism_score'] * tourism_weight
                                 + df['climate_score'] * climate_weight
                                 + df['immo_score'] * housing_weight
-                                + df['dyn_score'] * dynamism_weight), 2)
+                                + df['dev_score'] * dev_weight), 2)
 
     df_geo = pd.read_csv('data/geo_departments.csv')
     df = pd.merge(df, df_geo, on='department_name')
@@ -84,7 +85,5 @@ with row[1]:
 
 with row[2]:
     st.header('Top 10 departments')
-    st.table(df[['department_name', 'region_name', 'global_score']].nlargest(10, 'global_score'))
-    query = 'SELECT * FROM `dbt_ghurez_departments.dep_climate`'
-    df2 = pd.read_gbq(query, project_id="team-prello-jogaan", credentials=credentials)
-    st.table(df2)
+    st.table(df[['department_name', 'global_score']].nlargest(10, 'global_score'))
+    
