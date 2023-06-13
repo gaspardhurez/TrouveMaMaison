@@ -1,3 +1,5 @@
+pop
+
 import streamlit as st
 import pandas as pd
 import geopandas as gpd
@@ -6,8 +8,8 @@ from google.oauth2 import service_account
 from google.cloud import bigquery
 import pandas_gbq
 
-st.set_page_config(layout="wide")
 
+st.set_page_config(layout="wide")
 
 background_color = '''
     <style>
@@ -81,7 +83,7 @@ with row[1]:
     st.plotly_chart(fig, use_container_width=True)
 
 with row[2]:
-
+    credentials = service_account.Credentials.from_service_account_info(st.secrets["gcp_service_account"]
     st.header('Top 10 departments')
     st.table(df[['department_name', 'region_name', 'global_score']].nlargest(10, 'global_score'))
     query = 'SELECT * FROM `dbt_ghurez_departments.dep_climate`'
