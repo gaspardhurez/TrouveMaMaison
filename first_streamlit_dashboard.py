@@ -20,21 +20,23 @@ background_color = '''
 st.sidebar.header('Preferences')
 
 housing_score = st.slider('Profitability', 0, 5, value=5)
-    climate_score = st.slider('Climate', 0, 5, value=5)
-    tourism_score = st.slider('Tourism', 0, 5, value=5)
-    dev_score = st.slider('Development', 0, 5, value=5)
-    total_score = housing_score + climate_score + tourism_score + dev_score
+climate_score = st.slider('Climate', 0, 5, value=5)
+tourism_score = st.slider('Tourism', 0, 5, value=5)
+dev_score = st.slider('Development', 0, 5, value=5)
+total_score = housing_score + climate_score + tourism_score + dev_score
 
-    if total_score != 0:
-        housing_weight = housing_score / total_score
-        climate_weight = climate_score / total_score
-        dev_weight = dev_score / total_score
-        tourism_weight = tourism_score / total_score
-    else:
-        housing_weight = 1 / 4
-        climate_weight = 1 / 4
-        dev_weight = 1 / 4
-        tourism_weight = 1 / 4
+if total_score != 0:
+    housing_weight = housing_score / total_score
+    climate_weight = climate_score / total_score
+    dev_weight = dev_score / total_score
+    tourism_weight = tourism_score / total_score
+else:
+    housing_weight = 1 / 4
+    climate_weight = 1 / 4
+    dev_weight = 1 / 4
+    tourism_weight = 1 / 4
+
+
 st.markdown(background_color, unsafe_allow_html=True)
 
 
