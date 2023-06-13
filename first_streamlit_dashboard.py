@@ -1,4 +1,3 @@
-
 import streamlit as st
 import pandas as pd
 import geopandas as gpd
@@ -7,16 +6,10 @@ from google.oauth2 import service_account
 from google.cloud import bigquery
 import pandas_gbq
 
-
 st.set_page_config(layout="wide", initial_sidebar_state='expanded')
 credentials = service_account.Credentials.from_service_account_info(st.secrets["gcp_service_account"])
 client = bigquery.Client(credentials=credentials)
-background_color = '''
-    <style>
-        body {
-            background-color: #f2f2f2;        }
-    </style>
-'''
+
 st.sidebar.header('Parameters')
 
 st.sidebar.subheader('Criterias weight')
