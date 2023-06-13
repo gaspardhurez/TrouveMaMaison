@@ -42,7 +42,7 @@ st.sidebar.subheader('Map parameters')
 
 
 st.sidebar.subheader('Line chart metrics')
-st.sidebar.multiselect('Select data', ['global_score', 'tourism_score', 'immo_score'])
+line_data = st.sidebar.multiselect('Select data', ['global_score', 'tourism_score', 'immo_score'])
 
 
 st.markdown(background_color, unsafe_allow_html=True)
@@ -96,7 +96,7 @@ with row[0]:
 with row[1]:
     st.header('Top 10 departments')
     st.table(df[['department_name', 'global_score']].nlargest(10, 'global_score'))
-    st.plotly_chart(px.line(top_10_departments, y='global_score'), use_container_width=True)
+    st.plotly_chart(px.line(top_10_departments, y=line_data), use_container_width=True)
 
 
 
