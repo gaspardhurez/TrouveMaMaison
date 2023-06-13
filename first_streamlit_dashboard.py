@@ -94,6 +94,4 @@ with row[0]:
 with row[1]:
     st.header('Top 10 departments')
     st.table(df[['department_name', 'global_score']].nlargest(10, 'global_score'))
-    
-
-px.bar(df, y='global_score')
+    px.bar(df, y='global_score')
