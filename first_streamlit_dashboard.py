@@ -3,6 +3,16 @@ import pandas as pd
 import geopandas as gpd
 import plotly.express as px
 
+background_color = '''
+    <style>
+        body {
+            background-color: #f2f2f2;  /* Remplacez par la couleur de votre choix */
+        }
+    </style>
+'''
+
+st.markdown(background_color, unsafe_allow_html=True)
+
 st.set_page_config(layout="wide")
 
 st.title('Where should I buy my secondary home?')
