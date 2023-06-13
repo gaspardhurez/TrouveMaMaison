@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import geopandas as gpd
 import plotly.express as px
+from google.oauth2 import service_account
+from google.cloud import bigquery
 
 st.set_page_config(layout="wide")
 
@@ -9,8 +11,7 @@ st.set_page_config(layout="wide")
 background_color = '''
     <style>
         body {
-            background-color: #f2f2f2;  /* Remplacez par la couleur de votre choix */
-        }
+            background-color: #f2f2f2;        }
     </style>
 '''
 
@@ -81,4 +82,7 @@ with row[1]:
 with row[2]:
 
     st.header('Top 10 departments')
+
+    fig2 = px.
+    st.plotly_chart(fig2, use_container_width=True)
     st.table(df[['department_name', 'region_name', 'global_score']].nlargest(10, 'global_score'))
