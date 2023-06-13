@@ -100,12 +100,10 @@ fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
 
 with st.container():
 
-    st.write('<div class="horizontal-align-container">', unsafe_allow_html=True)
-    st.write('<div class="centered-table">', unsafe_allow_html=True)
+    st.markdown('<div class="horizontal-align-container">', unsafe_allow_html=True)
     st.table(df[['department_name', 'global_score']].nlargest(10, 'global_score'))
     st.plotly_chart(fig, use_container_width=True)
-    st.write('</div>', unsafe_allow_html=True)
-    st.write('</div>', unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
 
 
 
