@@ -20,7 +20,7 @@ background_color = '''
 st.sidebar.header('Preferences')
 
 st.sidebar.subheader('Profitability')
-housing_score = st.sidebar.slider(0, 5, value=5)
+housing_score = st.sidebar.slider(min_value=0, max_value=5, value=5)
 climate_score = st.sidebar.slider('Climate', 0, 5, value=5)
 tourism_score = st.sidebar.slider('Tourism', 0, 5, value=5)
 dev_score = st.sidebar.slider('Development', 0, 5, value=5)
