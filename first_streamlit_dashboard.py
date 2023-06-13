@@ -38,8 +38,6 @@ st.sidebar.subheader('Line chart metrics')
 line_data = st.sidebar.multiselect('Select data', ['global_score', 'tourism_score', 'immo_score'])
 
 
-st.markdown(background_color, unsafe_allow_html=True)
-
 
 st.title('Where should I buy my secondary home?')
 st.markdown("---")
