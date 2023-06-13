@@ -37,6 +37,13 @@ else:
     dev_weight = 1 / 4
     tourism_weight = 1 / 4
 
+st.sidebar.subheader('Map parameters')
+st.sidebar.selectbox('')
+
+
+st.sidebar.subheader('Displayed metrics')
+st.sidebar.multiselect('')
+
 
 st.markdown(background_color, unsafe_allow_html=True)
 
@@ -88,3 +95,5 @@ with row[1]:
     st.header('Top 10 departments')
     st.table(df[['department_name', 'global_score']].nlargest(10, 'global_score'))
     
+
+px.bar(df, y='global_score')
