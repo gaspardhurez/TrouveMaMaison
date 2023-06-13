@@ -38,7 +38,7 @@ st.sidebar.subheader('Line chart metrics')
 line_data = st.sidebar.multiselect('Select data', ['global_score', 'tourism_score', 'immo_score'])
 
 
-st.title('Where should I buy my secondary home?')
+# st.title('Where should I buy my secondary home?')
 st.markdown("---")
 
 # First line : map and top 10
@@ -81,6 +81,8 @@ fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
 
 col1.plotly_chart(fig, use_container_width=True)
 col1.plotly_chart(px.bar(top_10_departments, y=line_data), use_container_width=True)
+
+st.markdown("---")
 
 # Line 2 : Metrics
 
