@@ -43,10 +43,10 @@ st.markdown(background_color, unsafe_allow_html=True)
 st.title('Where should I buy my secondary home?')
 st.markdown("---")
 
-row = st.columns((2, 4, 3), gap='large')
+row = st.columns((4, 3), gap='large')
 
 
-with row[1]:
+with row[0]:
     st.header('Map')
 
     query = 'SELECT * FROM `scoring_tables.scores`'
@@ -83,7 +83,7 @@ with row[1]:
 
     st.plotly_chart(fig, use_container_width=True)
 
-with row[2]:
+with row[1]:
     st.header('Top 10 departments')
     st.table(df[['department_name', 'global_score']].nlargest(10, 'global_score'))
     
