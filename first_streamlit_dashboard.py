@@ -101,7 +101,7 @@ with st.container():
 
     st.markdown('<div class="horizontal-align-container">', unsafe_allow_html=True)
     col1.plotly_chart(fig, use_container_width=True)
-    col2.table(df[['department_name', 'global_score']].nlargest(10, 'global_score')).add_cass('centered-table')
+    col2.table(df[['department_name', 'global_score']].nlargest(10, 'global_score')).add_class('centered-table')
     st.markdown('</div>', unsafe_allow_html=True)
 
 
