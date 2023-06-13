@@ -84,7 +84,6 @@ col1.plotly_chart(px.bar(top_10_departments, y=line_data), use_container_width=T
 
 # Line 2 : Metrics
 
-col2.header('Top 10 departments')
 col2.table(df[['department_name', 'global_score']].nlargest(10, 'global_score'))
 col2.plotly_chart(px.line(top_10_departments, y=line_data), use_container_width=True)
 
