@@ -41,8 +41,8 @@ st.sidebar.subheader('Map parameters')
 # st.sidebar.selectbox('')
 
 
-st.sidebar.subheader('Displayed metrics')
-# st.sidebar.multiselect('')
+st.sidebar.subheader('Line chart metrics')
+st.sidebar.multiselect('Select data', ['global_score', 'tourism_score', 'immo_score'])
 
 
 st.markdown(background_color, unsafe_allow_html=True)
