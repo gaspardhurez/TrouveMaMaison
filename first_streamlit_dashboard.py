@@ -1,5 +1,3 @@
-pop
-
 import streamlit as st
 import pandas as pd
 import geopandas as gpd
@@ -10,7 +8,7 @@ import pandas_gbq
 
 
 st.set_page_config(layout="wide")
-
+credentials = service_account.Credentials.from_service_account_info(st.secrets["gcp_service_account"])
 background_color = '''
     <style>
         body {
@@ -84,7 +82,6 @@ with row[1]:
 
 with row[2]:
     st.header('Top 10 departments')
-    credentials = service_account.Credentials.from_service_account_info(st.secrets["gcp_service_account"]
     st.table(df[['department_name', 'region_name', 'global_score']].nlargest(10, 'global_score'))
     query = 'SELECT * FROM `dbt_ghurez_departments.dep_climate`'
     df2 = pd.read_gbq(query, project_id="team-prello-jogaan")
