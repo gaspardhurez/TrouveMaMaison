@@ -82,7 +82,4 @@ with row[1]:
 with row[2]:
 
     st.header('Top 10 departments')
-
-    fig2 = px.
-    st.plotly_chart(fig2, use_container_width=True)
     st.table(df[['department_name', 'region_name', 'global_score']].nlargest(10, 'global_score'))
