@@ -18,6 +18,7 @@ st.markdown(
         flex-direction: row;
         justify-content: space-between;
         align-items: stretch;
+        background-color:#EEEEEE
     }
     .centered-table {
         margin: auto;
