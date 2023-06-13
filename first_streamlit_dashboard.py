@@ -87,5 +87,5 @@ with row[2]:
     st.header('Top 10 departments')
     st.table(df[['department_name', 'region_name', 'global_score']].nlargest(10, 'global_score'))
     query = 'SELECT * FROM `dbt_ghurez_departments.dep_climate`'
-    df2 = pd.read_gbq(query, project_id="team-prello-jogaan")
+    df2 = pd.read_gbq(query, project_id="team-prello-jogaan", credentials=credentials)
     st.table(df2)
