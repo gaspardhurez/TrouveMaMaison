@@ -4,6 +4,7 @@ import geopandas as gpd
 import plotly.express as px
 from google.oauth2 import service_account
 from google.cloud import bigquery
+import pandas_gbq
 
 st.set_page_config(layout="wide")
 
