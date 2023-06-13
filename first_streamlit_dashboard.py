@@ -51,10 +51,10 @@ with row[1]:
 
     query = 'SELECT * FROM `scoring_tables.scores`'
     df = pd.read_gbq(query, project_id="team-prello-jogaan", credentials=credentials)
-    df['tourism_score'] = df['tourism_score'].str.replace(',', '.').astype(float)
-    df['climate_score'] = df['climate_score'].str.replace(',', '.').astype(float)
-    df['immo_score'] = df['immo_score'].str.replace(',', '.').astype(float)
-    df['dev_score'] = df['dev_score'].str.replace(',', '.').astype(float)
+    df['tourism_score'] = df['tourism_score'].astype(float)
+    df['climate_score'] = df['climate_score'].astype(float)
+    df['immo_score'] = df['immo_score'].astype(float)
+    df['dev_score'] = df['dev_score'].astype(float)
     df['global_score'] = round((df['tourism_score'] * tourism_weight
                                 + df['climate_score'] * climate_weight
                                 + df['immo_score'] * housing_weight
