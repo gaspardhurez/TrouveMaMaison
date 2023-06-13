@@ -8,7 +8,7 @@ from google.cloud import bigquery
 import pandas_gbq
 
 
-st.set_page_config(layout="wide")
+st.set_page_config(layout="wide", initial_sidebar_sate='expanded')
 credentials = service_account.Credentials.from_service_account_info(st.secrets["gcp_service_account"])
 client = bigquery.Client(credentials=credentials)
 background_color = '''
@@ -17,19 +17,9 @@ background_color = '''
             background-color: #f2f2f2;        }
     </style>
 '''
+st.sidebar.header('Preferences')
 
-st.markdown(background_color, unsafe_allow_html=True)
-
-
-st.title('Where should I buy my secondary home?')
-st.markdown("---")
-
-row = st.columns((2, 4, 3), gap='large')
-
-with row[0]:
-    st.header('Preferences')
-
-    housing_score = st.slider('Profitability', 0, 5, value=5)
+housing_score = st.slider('Profitability', 0, 5, value=5)
     climate_score = st.slider('Climate', 0, 5, value=5)
     tourism_score = st.slider('Tourism', 0, 5, value=5)
     dev_score = st.slider('Development', 0, 5, value=5)
@@ -45,6 +35,16 @@ with row[0]:
         climate_weight = 1 / 4
         dev_weight = 1 / 4
         tourism_weight = 1 / 4
+st.markdown(background_color, unsafe_allow_html=True)
+
+
+st.title('Where should I buy my secondary home?')
+st.markdown("---")
+
+row = st.columns((2, 4, 3), gap='large')
+
+with row[0]:
+
 
 with row[1]:
     st.header('Map')
