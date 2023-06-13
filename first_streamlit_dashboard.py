@@ -45,8 +45,6 @@ st.markdown("---")
 
 row = st.columns((2, 4, 3), gap='large')
 
-with row[0]:
-
 
 with row[1]:
     st.header('Map')
