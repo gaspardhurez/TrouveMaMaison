@@ -8,7 +8,7 @@ from google.cloud import bigquery
 import pandas_gbq
 
 
-st.set_page_config(layout="wide", initial_sidebar_sate='expanded')
+st.set_page_config(layout="wide", initial_sidebar_state='expanded')
 credentials = service_account.Credentials.from_service_account_info(st.secrets["gcp_service_account"])
 client = bigquery.Client(credentials=credentials)
 background_color = '''
