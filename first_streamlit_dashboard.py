@@ -10,6 +10,9 @@ st.set_page_config(layout="wide", initial_sidebar_state='expanded')
 credentials = service_account.Credentials.from_service_account_info(st.secrets["gcp_service_account"])
 client = bigquery.Client(credentials=credentials)
 
+with open('style.css') as f:
+    st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
 st.markdown(
     """
     <style>
@@ -98,7 +101,6 @@ fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
 
 # First line : map and top 10
 
-container1 = st.container()
 with container1 :
 
     st.markdown('<div class="horizontal-align-container">', unsafe_allow_html=True)
@@ -112,7 +114,6 @@ st.markdown("---")
 
 # Line 2 : Metrics
 
-with st.container():
     col2.plotly_chart(px.line(top_10_departments, y=line_data), use_container_width=True)
     col1.plotly_chart(px.bar(top_10_departments, y=line_data), use_container_width=True)
 
