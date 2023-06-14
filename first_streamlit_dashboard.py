@@ -114,8 +114,8 @@ st.markdown("---")
 
 # Line 2 : Metrics
 
-    col2.plotly_chart(px.line(top_10_departments, y=line_data), use_container_width=True)
-    col1.plotly_chart(px.bar(top_10_departments, y=line_data), use_container_width=True)
+col2.plotly_chart(px.line(top_10_departments, y=line_data), use_container_width=True)
+col1.plotly_chart(px.bar(top_10_departments, y=line_data), use_container_width=True)
 
 
 
