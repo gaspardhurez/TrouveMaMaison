@@ -101,7 +101,7 @@ fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
 
 # First line : map and top 10
 
-with container1 :
+with st.container :
 
     st.markdown('<div class="horizontal-align-container">', unsafe_allow_html=True)
     col2.plotly_chart(fig, use_container_width=True)
