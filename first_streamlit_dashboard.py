@@ -35,7 +35,7 @@ else:
     tourism_weight = 1 / 4
 
 st.sidebar.subheader('Table')
-data_table = st.sidebar.multiselect("Sélectionner jusqu'à 3 métriques", ['predicted_hot_days', 'temperature_gap', 'secondary_home_rate', 'avg_yield'], default='avg_yield', key=1, max_selections=3)
+data_table = st.sidebar.multiselect("Sélectionner jusqu'à 3 métriques", ['predicted_hot_days', 'temperature_gap', 'secondary_home_rate', 'avg_yield'], default=['temperature_gap', 'secondary_home_rate', 'avg_yield'], key=1, max_selections=3)
 
 st.sidebar.subheader('Carte proportionnelle')
 data_treemap = st.sidebar.selectbox('Sélectionner une métrique', ['predicted_hot_days', 'temperature_gap', 'secondary_home_rate', 'avg_yield'], index = 1, key=2)
@@ -44,8 +44,8 @@ st.sidebar.subheader('Graphique à barres')
 data_bar = st.sidebar.selectbox('Sélectionner une métrique', ['predicted_hot_days', 'temperature_gap', 'secondary_home_rate', 'avg_yield'], index = 2,  key=3)
 
 
-st.title('Où acheter ma deuxième maison?')
-st.markdown("---")
+#st.title('Où acheter ma deuxième maison?')
+# st.markdown("---")
 
 
 col1, inter_space, col2 = st.columns((2,0.2, 3), gap='small')
@@ -81,9 +81,6 @@ col1.header('Top 10')
     # Column 1
 
 col1.write('')
-# top_10_departments_df = pd.DataFrame(top_10_departments)
-# top_10_departments_df = top_10_departments_df['department_name']
-# top_10_departments_df[data_table] = top_10_departments[data_table]
 top_10_departments_df = top_10_departments.loc[:, data_table]
 top_10_departments_df['department_name'] = top_10_departments['department_name']
 top_10_departments_df = top_10_departments_df.set_index('department_name')
