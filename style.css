@@ -26,8 +26,11 @@ div.css-ysnqb2.e1g8pov64 {
   width: 275px;
 }
 
+h1 {
+  padding: 0;
+}
 div.css-ysnqb2 {
-  padding-left: 10px;
+  padding-left: 20px;
 }
 
 label.css-mkogse.e16fv1kl2 {
@@ -41,11 +44,30 @@ div.css-z5fcl4.e1g8pov64 {
 }
 
 .css-z5fcl4.eqr7zpz0 {
-    margin-top=1px;
+    margin-top=2px;
 }
 .css-10trblm {
-    margin-left:40px;
+    margin-left:0px;
 }
+
+
+
+/* Metrics */
+
+
+div.css-zt5igj  {
+margin-top: 10px;
+}
+
+.css-1544g2n h2 {
+  margin-right: 0px;
+}
+
+h2 {
+margin-right: 413px;
+}
+
+
 
 .css-z5fcl4 {
     margin-left:60px;

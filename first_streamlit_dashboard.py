@@ -16,20 +16,9 @@ with open('style.css') as f:
 
 # Sidebar
 
-# st.sidebar.header('Second Home Finder')
+st.sidebar.header('Second Home Finder')
 
 st.sidebar.markdown("---")
-
-st.markdown(
-    f'''
-        <style>
-            .sidebar .sidebar-content {{
-                width: 500px;
-            }}
-        </style>
-    ''',
-    unsafe_allow_html=True
-)
 
 st.sidebar.subheader('parameters')
 housing_score = st.sidebar.slider('Profitability', 0, 5, value=5)
@@ -60,19 +49,21 @@ st.markdown("---")
 
 
 col1, inter_space, col2 = st.columns((2,0.2, 3), gap='small')
+blank_space_1 = col1.write('')
+blank_space_2 = col2.write('')
 
 # col1.markdown('### Top 10 departments')
 
 query = 'SELECT * FROM `dbt_ghurez_departments.dep_all_kpis`'
 df = pd.read_gbq(query, project_id="team-prello-jogaan", credentials=credentials)
-df['tourism_score'] = df['tourism_score'].astype(float)
-df['climate_score'] = df['climate_score'].astype(float)
-df['immo_score'] = df['immo_score'].astype(float)
-df['dev_score'] = df['dev_score'].astype(float)
-df['global_score'] = round((df['tourism_score'] * tourism_weight
-                            + df['climate_score'] * climate_weight
-                            + df['immo_score'] * housing_weight
-                            + df['dev_score'] * dev_weight), 2)
+df['tourism_score_normalized'] = df['tourism_score_normalized'].astype(float)
+df['climate_score_normalized'] = df['climate_score_normalized'].astype(float)
+df['immo_score_normalized'] = df['immo_score_normalized'].astype(float)
+df['dev_score_normalized'] = df['dev_score_normalized'].astype(float)
+df['global_score'] = round((df['tourism_score_normalized'] * tourism_weight
+                            + df['climate_score_normalized'] * climate_weight
+                            + df['immo_score_normalized'] * housing_weight
+                            + df['dev_score_normalized'] * dev_weight), 2)
 
 df_geo = pd.read_csv('data/geo_departments.csv')
 df = pd.merge(df, df_geo, on='department_name')
@@ -81,6 +72,20 @@ geodata = gpd.read_file('data/departements.geojson')
 df_geo = pd.merge(geodata, df, left_on='nom', right_on='department_name', how='inner')
 
 top_10_departments = df_geo.nlargest(10, 'global_score')
+
+
+# Line 1 : T op 10
+
+col1.header('Top 10')
+
+    # Column 1
+
+col1.write('')
+col1.dataframe(df[['department_name', 'region_name', 'global_score']].nlargest(10, 'global_score'), hide_index=True, width=400)
+
+    # Column 2
+
+col2.write('')
 fig = px.choropleth_mapbox(
     top_10_departments,
     geojson=top_10_departments.geometry,
@@ -93,30 +98,31 @@ fig = px.choropleth_mapbox(
     labels={'global_score': 'Global Score'},
     
 )
-
 fig.update_layout(margin={"r": 200, "t": 70, "l": 0, "b": 0}, showlegend=False, legend_itemwidth=35, width=650)
-
-# First line : map and top 10
-
-col1.header('Top 10')
 col2.plotly_chart(fig, use_container_width=False)
-col1.dataframe(df[['department_name', 'region_name', 'global_score']].nlargest(10, 'global_score'), hide_index=True, width=400)
-
 
 # Line 2 : Metrics
 
-
-fig_2 = px.bar(top_10_departments, x=filter_data, y='department_name', barmode='group', orientation='h', text='department_name')
-fig_2.update_traces(textposition="inside", insidetextanchor="start", textfont_size=15)
-fig_2.update_layout(width=200, margin={"r": 150, "t": 90, "l": 0, "b": 0},showlegend=False, yaxis={'side' : 'right', 'visible' : False, 'categoryorder':'total ascending', 'title' : None,}, xaxis={'title' : filter_data[0], 'side' : 'top'})
 col1.header('Metrics')
-col2.plotly_chart(fig_2, use_container_width=True)
 
+    # Column 1
+
+col1.write('')
 fig_3 = px.treemap(top_10_departments, path=[px.Constant('All'),'department_name'], values=filter_data[0], color=filter_data[0])
 fig_3.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 75}, xaxis={'title' : filter_data[0]})
 fig_3.update_traces(root_color="whitesmoke")
 fig_3.update(layout_coloraxis_showscale=False)
 col1.plotly_chart(fig_3, use_container_width=True)
+
+    # Column 2
+
+col2.write('')
+fig_2 = px.bar(top_10_departments, x=filter_data, y='department_name', barmode='group', orientation='h', text='department_name')
+fig_2.update_traces(textposition="inside", insidetextanchor="start", textfont_size=15)
+fig_2.update_layout(width=200, margin={"r": 150, "t": 90, "l": 0, "b": 0},showlegend=False, yaxis={'side' : 'right', 'visible' : False, 'categoryorder':'total ascending', 'title' : None,}, xaxis={'title' : filter_data[0], 'side' : 'top'})
+col2.plotly_chart(fig_2, use_container_width=True)
+
+
 
 
 # st.markdown("---")
