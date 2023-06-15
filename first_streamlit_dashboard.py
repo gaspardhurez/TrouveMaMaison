@@ -113,7 +113,7 @@ col2.plotly_chart(fig, use_container_width=False)
 
 # Line 2 : Metrics
 
-col1.header('Métriques')
+col1.header('    Métriques')
 
     # Column 1
 
