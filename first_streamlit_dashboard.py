@@ -35,13 +35,13 @@ else:
     tourism_weight = 1 / 4
 
 st.sidebar.subheader('Table')
-data_table = st.sidebar.multiselect("Sélectionner jusqu'à 3 métriques", ['predicted_hot_days', 'temperature_gap', 'secondary_home_rate', 'avg_yield'], default=['temperature_gap', 'secondary_home_rate', 'avg_yield'], key=1, max_selections=3)
+data_table = st.sidebar.multiselect("Sélectionner jusqu'à 3 métriques", ['Jours caniculaires', 'Ecart de temperature (2050)', 'Taux de maisons secondaires', 'Rentabilité locative'], default=['Ecart de temperature (2050)', 'Taux de maisons secondaires', 'Rentabilité locative'], key=1, max_selections=3)
 
 st.sidebar.subheader('Carte proportionnelle')
-data_treemap = st.sidebar.selectbox('Sélectionner une métrique', ['predicted_hot_days', 'temperature_gap', 'secondary_home_rate', 'avg_yield'], index = 1, key=2)
+data_treemap = st.sidebar.selectbox('Sélectionner une métrique', ['Jours caniculaires', 'Ecart de temperature (2050)', 'Taux de maisons secondaires', 'Rentabilité locative'], index = 1, key=2)
 
 st.sidebar.subheader('Graphique à barres')
-data_bar = st.sidebar.selectbox('Sélectionner une métrique', ['predicted_hot_days', 'temperature_gap', 'secondary_home_rate', 'avg_yield'], index = 2,  key=3)
+data_bar = st.sidebar.selectbox('Sélectionner une métrique', ['Jours caniculaires', 'Ecart de temperature (2050)', 'Taux de maisons secondaires', 'Rentabilité locative'], index = 2,  key=3)
 
 
 #st.title('Où acheter ma deuxième maison?')
@@ -73,6 +73,11 @@ df_geo = pd.merge(geodata, df, left_on='nom', right_on='department_name', how='i
 
 top_10_departments = df_geo.nlargest(10, 'global_score')
 
+top_10_departments['Jours caniculaires'] = top_10_departments['predicted_hot_days']
+top_10_departments['Rentabilité locative'] = top_10_departments['avg_yield']
+top_10_departments['Ecart de temperature (2050)'] = top_10_departments['temperature_gap']
+top_10_departments["Taux de maisons secondaires"] = top_10_departments['secondary_home_rate']
+
 
 # Line 1 : T op 10
 
@@ -84,7 +89,7 @@ col1.write('')
 top_10_departments_df = top_10_departments.loc[:, data_table]
 top_10_departments_df['department_name'] = top_10_departments['department_name']
 top_10_departments_df = top_10_departments_df.set_index('department_name')
-col1.dataframe(top_10_departments_df, hide_index=False)
+col1.dataframe(top_10_departments_df, hide_index=False, use_container_width=True)
 
 
     # Column 2
