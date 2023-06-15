@@ -1,17 +1,17 @@
-/* Logo */
-/* Adapted from Zachary Blackwood */
+
 [data-testid="stSidebar"] {
-                background-image: url(https://streamlit.io/images/brand/streamlit-logo-secondary-colormark-darktext.png);
+                background-image: url(https://i.ibb.co/mrs8qyh/image-removebg-preview.png);
                 background-size: 200px;
                 background-repeat: no-repeat;
                 background-position: 4px 20px;
+                background-color:  #d7e8eb;
             }
 
 
-/* Card */
-/* Adapted from https://startbootstrap.com/theme/sb-admin-2 */
+
+
 div.css-1r6slb0.e1tzin5v2 {
-    background-color: #FFFFFF;
+    background-color: #f9f7f2;
     border: 1px solid #CCCCCC;
     padding: 5% 5% 5% 10%;
     border-radius: 5px;
@@ -27,27 +27,24 @@ label.css-mkogse.e16fv1kl2 {
     text-transform: uppercase !important;
 }
 
-
-/* Move block container higher */
-div.block-container.css-18e3th9.egzxvld2 {
-  margin-top: -5em;
+div.css-z5fcl4.e1g8pov64 {
+    padding: 1rem 1rem 0rem;
 }
 
-
-/* Hide hamburger menu and footer */
-div.css-r698ls.e8zbici2 {
-  display: none;
+.css-z5fcl4.eqr7zpz0 {
+    margin-top=1px;
+}
+.css-10trblm {
+    margin-left:40px;
 }
 
-footer.css-ipbk5a.egzxvld4 {
-  display: none;
+.css-z5fcl4 {
+    margin-left:60px;
+  
 }
 
-footer.css-12gp8ed.eknhn3m4 {
-  display: none;
+.esravye2 {
+text-align: center; 
 }
 
-div.vg-tooltip-element {
-  display: none;
-}
 

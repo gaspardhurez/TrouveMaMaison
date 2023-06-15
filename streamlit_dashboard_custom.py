@@ -20,7 +20,9 @@ with open('style.css') as f:
 
 st.sidebar.markdown("---")
 
-st.sidebar.subheader('parameters')
+
+t = "<div class='test'>Hello there my name is </div>"
+st.sidebar.markdown(t, unsafe_allow_html=True)
 housing_score = st.sidebar.slider('Profitability', 0, 5, value=5)
 climate_score = st.sidebar.slider('Climate', 0, 5, value=5)
 tourism_score = st.sidebar.slider('Tourism', 0, 5, value=5)
@@ -38,9 +40,9 @@ else:
     dev_weight = 1 / 4
     tourism_weight = 1 / 4
 
-# st.sidebar.subheader('Map parameters')
+st.sidebar.subheader('Map parameters')
 
-st.sidebar.subheader('Metrics')
+st.sidebar.subheader('Line chart metrics')
 filter_data = st.sidebar.multiselect('Select data', ['predicted_hot_days', 'temperature_gap', 'secondary_home_rate', 'avg_yield'], default='avg_yield')
 
 
