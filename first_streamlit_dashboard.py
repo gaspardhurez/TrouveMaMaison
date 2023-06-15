@@ -93,6 +93,7 @@ col1.dataframe(top_10_departments_df, hide_index=False)
     # Column 2
 
 col2.write('')
+col2.write('')
 fig = px.choropleth_mapbox(
     top_10_departments,
     geojson=top_10_departments.geometry,
