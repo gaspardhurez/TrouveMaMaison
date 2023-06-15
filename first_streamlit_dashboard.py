@@ -16,15 +16,11 @@ with open('style.css') as f:
 
 # Sidebar
 
-st.sidebar.header('Second Home Finder')
-
-st.sidebar.markdown("---")
-
-st.sidebar.subheader('parameters')
-housing_score = st.sidebar.slider('Profitability', 0, 5, value=5)
-climate_score = st.sidebar.slider('Climate', 0, 5, value=5)
-tourism_score = st.sidebar.slider('Tourism', 0, 5, value=5)
-dev_score = st.sidebar.slider('Development', 0, 5, value=5)
+st.sidebar.subheader("Critères d'achat")
+housing_score = st.sidebar.slider('Rentabilité', 0, 5, value=5)
+climate_score = st.sidebar.slider('Prédictions climatiques', 0, 5, value=5)
+tourism_score = st.sidebar.slider('Tourisme', 0, 5, value=5)
+dev_score = st.sidebar.slider('Développement', 0, 5, value=5)
 total_score = housing_score + climate_score + tourism_score + dev_score
 
 if total_score != 0:
@@ -38,13 +34,17 @@ else:
     dev_weight = 1 / 4
     tourism_weight = 1 / 4
 
-# st.sidebar.subheader('Map parameters')
+st.sidebar.subheader('Table')
+data_table = st.sidebar.multiselect("Sélectionner jusqu'à 3 métriques", ['predicted_hot_days', 'temperature_gap', 'secondary_home_rate', 'avg_yield'], default='avg_yield', key=1, max_selections=3)
 
-st.sidebar.subheader('Metrics')
-filter_data = st.sidebar.multiselect('Select data', ['predicted_hot_days', 'temperature_gap', 'secondary_home_rate', 'avg_yield'], default='avg_yield')
+st.sidebar.subheader('Carte proportionnelle')
+data_treemap = st.sidebar.selectbox('Sélectionner une métrique', ['predicted_hot_days', 'temperature_gap', 'secondary_home_rate', 'avg_yield'], index = 1, key=2)
+
+st.sidebar.subheader('Graphique à barres')
+data_bar = st.sidebar.selectbox('Sélectionner une métrique', ['predicted_hot_days', 'temperature_gap', 'secondary_home_rate', 'avg_yield'], index = 2,  key=3)
 
 
-st.title('Where should I buy my second home?')
+st.title('Où acheter ma deuxième maison?')
 st.markdown("---")
 
 
@@ -52,7 +52,7 @@ col1, inter_space, col2 = st.columns((2,0.2, 3), gap='small')
 blank_space_1 = col1.write('')
 blank_space_2 = col2.write('')
 
-# col1.markdown('### Top 10 departments')
+# Chargement des données et calculs
 
 query = 'SELECT * FROM `dbt_ghurez_departments.dep_all_kpis`'
 df = pd.read_gbq(query, project_id="team-prello-jogaan", credentials=credentials)
@@ -81,7 +81,14 @@ col1.header('Top 10')
     # Column 1
 
 col1.write('')
-col1.dataframe(df[['department_name', 'region_name', 'global_score']].nlargest(10, 'global_score'), hide_index=True, width=400)
+# top_10_departments_df = pd.DataFrame(top_10_departments)
+# top_10_departments_df = top_10_departments_df['department_name']
+# top_10_departments_df[data_table] = top_10_departments[data_table]
+top_10_departments_df = top_10_departments.loc[:, data_table]
+top_10_departments_df['department_name'] = top_10_departments['department_name']
+top_10_departments_df = top_10_departments_df.set_index('department_name')
+col1.dataframe(top_10_departments_df, hide_index=False)
+
 
     # Column 2
 
@@ -90,7 +97,7 @@ fig = px.choropleth_mapbox(
     top_10_departments,
     geojson=top_10_departments.geometry,
     locations=top_10_departments.index,
-    color=filter_data[0],
+    color='global_score',
     mapbox_style="carto-positron",
     center={"lat": 46.8, "lon": 1.8},
     zoom=4.2,
@@ -103,13 +110,13 @@ col2.plotly_chart(fig, use_container_width=False)
 
 # Line 2 : Metrics
 
-col1.header('Metrics')
+col1.header('Métriques')
 
     # Column 1
 
 col1.write('')
-fig_3 = px.treemap(top_10_departments, path=[px.Constant('All'),'department_name'], values=filter_data[0], color=filter_data[0])
-fig_3.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 75}, xaxis={'title' : filter_data[0]})
+fig_3 = px.treemap(top_10_departments, path=[px.Constant('All'),'department_name'], values=data_treemap, color=data_treemap)
+fig_3.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 75}, xaxis={'title' : data_treemap})
 fig_3.update_traces(root_color="whitesmoke")
 fig_3.update(layout_coloraxis_showscale=False)
 col1.plotly_chart(fig_3, use_container_width=True)
@@ -117,9 +124,9 @@ col1.plotly_chart(fig_3, use_container_width=True)
     # Column 2
 
 col2.write('')
-fig_2 = px.bar(top_10_departments, x=filter_data, y='department_name', barmode='group', orientation='h', text='department_name')
+fig_2 = px.bar(top_10_departments, x=data_bar, y='department_name', barmode='group', orientation='h', text='department_name')
 fig_2.update_traces(textposition="inside", insidetextanchor="start", textfont_size=15)
-fig_2.update_layout(width=200, margin={"r": 150, "t": 90, "l": 0, "b": 0},showlegend=False, yaxis={'side' : 'right', 'visible' : False, 'categoryorder':'total ascending', 'title' : None,}, xaxis={'title' : filter_data[0], 'side' : 'top'})
+fig_2.update_layout(width=200, margin={"r": 150, "t": 90, "l": 0, "b": 0},showlegend=False, yaxis={'side' : 'right', 'visible' : False, 'categoryorder':'total ascending', 'title' : None,}, xaxis={'title' : data_bar[0], 'side' : 'top'})
 col2.plotly_chart(fig_2, use_container_width=True)
 
 

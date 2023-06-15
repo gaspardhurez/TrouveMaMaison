@@ -1,5 +1,5 @@
 
-[data-testid="stSidebar"] {
+/* [data-testid="stSidebar"] {
                 background-image: url(https://i.ibb.co/mrs8qyh/image-removebg-preview.png);
                 background-size: 200px;
                 background-repeat: no-repeat;
@@ -8,7 +8,7 @@
                 width: 800px;
             }
 
-
+*/
 
 
 div.css-1r6slb0.e1tzin5v2 {
@@ -50,11 +50,17 @@ div.css-z5fcl4.e1g8pov64 {
     margin-left:0px;
 }
 
+/* Sidebar */ 
+.css-1544g2n {
+  padding: 3.5rem 1rem 1rem 2rem;
 
+}
 
-/* Metrics */
-
-
+/* First markdown */
+div.element-container.css-jfvt4l.esravye2 { 
+  height: 30px;
+}
+/* Title */
 div.css-zt5igj  {
 margin-top: 10px;
 }
