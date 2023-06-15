@@ -20,6 +20,17 @@ with open('style.css') as f:
 
 st.sidebar.markdown("---")
 
+st.markdown(
+    f'''
+        <style>
+            .sidebar .sidebar-content {{
+                width: 500px;
+            }}
+        </style>
+    ''',
+    unsafe_allow_html=True
+)
+
 st.sidebar.subheader('parameters')
 housing_score = st.sidebar.slider('Profitability', 0, 5, value=5)
 climate_score = st.sidebar.slider('Climate', 0, 5, value=5)
