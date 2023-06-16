@@ -101,7 +101,7 @@ data_bar = st.sidebar.selectbox('Sélectionner une métrique',
     'Evolution de la population'], index = 2,  key=3)
 
 
-st.title('Second Home Finder')
+st.title('Trouve ma Maison!')
 # st.markdown("---")
 
 
@@ -153,7 +153,7 @@ col1.write('')
 top_10_departments_df = top_10_departments.loc[:, data_table]
 top_10_departments_df['department_name'] = top_10_departments['department_name']
 top_10_departments_df = top_10_departments_df.set_index('department_name')
-col1.dataframe(top_10_departments_df, hide_index=False, use_container_width=True)
+col1.dataframe(top_10_departments_df.sort_values(by='department_name'), hide_index=False, use_container_width=True)
 
 
     # Column 2
@@ -164,7 +164,7 @@ fig = px.choropleth_mapbox(
     top_10_departments,
     geojson=top_10_departments.geometry,
     locations=top_10_departments.index,
-    color='global_score_normalized',
+    # color='global_score_normalized',
     mapbox_style="carto-positron",
     center={"lat": 46.8, "lon": 1.8},
     zoom=4.2,
