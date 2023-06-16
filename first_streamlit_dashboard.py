@@ -19,22 +19,52 @@ with open('style.css') as f:
 # Sidebar
 
 st.sidebar.subheader("Critères d'achat")
-housing_score = st.sidebar.slider('Rentabilité', 0, 5, value=5)
-climate_score = st.sidebar.slider('Prédictions climatiques', 0, 5, value=5)
-tourism_score = st.sidebar.slider('Tourisme', 0, 5, value=5)
-dev_score = st.sidebar.slider('Développement', 0, 5, value=5)
-total_score = housing_score + climate_score + tourism_score + dev_score
+housing_score = st.sidebar.select_slider('Rentabilité', options=['Pas important', 'Peu important', 'Important', 'Très important'], value='Très important')
+climate_score = st.sidebar.select_slider('Prédictions climatiques', options=['Pas important', 'Peu important', 'Important', 'Très important'], value='Très important')
+tourism_score = st.sidebar.select_slider('Tourisme', options=['Pas important', 'Peu important', 'Important', 'Très important'], value='Très important')
+dev_score = st.sidebar.select_slider('Développement', options=['Pas important', 'Peu important', 'Important', 'Très important'], value='Très important')
 
-if total_score != 0:
-    housing_weight = housing_score / total_score
-    climate_weight = climate_score / total_score
-    dev_weight = dev_score / total_score
-    tourism_weight = tourism_score / total_score
-else:
-    housing_weight = 1 / 4
-    climate_weight = 1 / 4
-    dev_weight = 1 / 4
-    tourism_weight = 1 / 4
+if housing_score == 'Pas important':
+    housing_score_int = 1
+elif housing_score == 'Peu important' : 
+    housing_score_int = 2
+elif housing_score == 'Important' : 
+    housing_score_int = 3
+elif housing_score == 'Très important' : 
+    housing_score_int = 4
+
+if climate_score == 'Pas important':
+    climate_score_int = 1
+elif climate_score == 'Peu important' : 
+    climate_score_int = 2
+elif climate_score == 'Important' : 
+    climate_score_int = 3
+elif climate_score == 'Très important' : 
+    climate_score_int = 4
+
+if dev_score == 'Pas important':
+    dev_score_int = 1
+elif dev_score == 'Peu important' : 
+    dev_score_int = 2
+elif dev_score == 'Important' : 
+    dev_score_int = 3
+elif dev_score == 'Très important' : 
+    dev_score_int = 4
+
+if tourism_score == 'Pas important':
+    tourism_score_int = 1
+elif tourism_score == 'Peu important' : 
+    tourism_score_int = 2
+elif tourism_score == 'Important' : 
+    tourism_score_int = 3
+elif tourism_score == 'Très important' : 
+    tourism_score_int = 4
+
+total_score = housing_score_int + climate_score_int + tourism_score_int + dev_score_int
+housing_weight = housing_score_int / total_score
+climate_weight = climate_score_int / total_score
+dev_weight = dev_score_int / total_score
+tourism_weight = tourism_score_int / total_score
 
 st.sidebar.subheader('Table')
 data_table = st.sidebar.multiselect("Sélectionnez jusqu'à 5 métriques", 
