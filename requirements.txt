@@ -4,3 +4,4 @@ pandas_gbq==0.19.2
 plotly==5.14.1
 protobuf==4.23.2
 streamlit==1.23.1
+Sklearn
